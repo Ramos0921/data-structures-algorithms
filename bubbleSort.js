@@ -1,4 +1,5 @@
 //BUBBLE SORT IS AN USEFUL ALGORITHM FOR SORTING AN ARRAY IN INCREMENTINO OR DECREMENTING ORDER
+//time complexity: quadratic O(n)^2
 
 var bubbleSort = function(arr){
   //outter for loop ensures array is iterated through each element
