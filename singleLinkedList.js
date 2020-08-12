@@ -40,6 +40,7 @@ List.prototype.search= function(target){
 List.prototype.removeHead = function(){
   var headVal= this.head.data;
   this.head = this.head.next;
+  this.head.prev = null;
   return headVal
 }
 
