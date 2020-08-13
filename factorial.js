@@ -18,3 +18,20 @@ var factorial = function(n){
 }
 
 //factorial(5)=>120
+
+// factorial recursion explained
+//| stack |
+//| facotrial(0)= 1  |
+//| facotrial(1)=1*factorial(0)  |
+//| facotrial(2)=2*factorial(1)  |
+//| facotrial(3)=3*factorial(2)  |
+//| facotrial(4)=4*factorial(3)  |
+//| facotrial(5)=5*factorial(4)  |
+// then
+//| stack |
+//| facotrial(0)= 1  |
+//| facotrial(1)=>(1*1)=1 |
+//| facotrial(2)=>(2*1)=2 |
+//| facotrial(3)=>(3*2)=6  |
+//| facotrial(4)=>(4*6)=24  |
+//| facotrial(5)=>(5*24)=120  |
