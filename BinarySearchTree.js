@@ -25,7 +25,6 @@ BST.prototype.insert= function(data){
       this.right.insert(data);
     }
   }
-  //alert(this)
 }
 
 BST.prototype.search=function(value){
@@ -51,10 +50,9 @@ BST.prototype.search=function(value){
 
 BST.prototype.delete=function(value){
   if(this.search(value)){
-
     if(this.data===value){
       //deletes leaf nodes
-      if(this.parent && this.left === null & this.right ===null){
+      if(this.parent && this.left === null && this.right===null){
         if(this.parent.right){
           if(this.parent.right.data===value){
             this.parent.right= null;
@@ -65,9 +63,55 @@ BST.prototype.delete=function(value){
             this.parent.left= null;
           }
         }
-
       }
+      //deletes child with only one child
+      if(this.parent && (this.left===null||this.right===null)&&(this.left|| this.right)){
+       var child= this.left || this.right;
+       if(this === this.parent.left){
+         child.parent = this.parent;
+         this.parent.left = child
+       }else{
+         child.parent = this.parent;
+         this.parent.right = child
+       }
+      }
+      //deletes child with left and right children
+      if(this.parent && this.left && this.right){
 
+        var next = this.left;
+        while(next){
+          var succesor = next;
+          next = next.left;
+        }
+
+        if(succesor.right){
+          succesor.parent.left = succesor.right
+        }else{
+          succesor.parent.left = null;
+        }
+
+        succesor.parent= this.parent;
+
+        if(this.right){
+          succesor.right = this.right;
+          this.right.parent = succesor;
+        }else{
+          succesor.right = null;
+        }
+
+        if(this.left){
+          succesor.left = this.left
+          this.left.parent = succesor;
+        }else{
+          succesor.left = null
+        }
+
+        if(this===this.parent.left){
+          this.parent.left = succesor;
+        }else{
+          this.parent.right = succesor;
+        }
+      }
 
     }
 
@@ -84,4 +128,27 @@ BST.prototype.delete=function(value){
   }else{
     return 'value not found in tree'
   }
+}
+BST.prototype.smallest = function(){
+  var next = this.left;
+    while(next){
+      var smallest = next;
+      next = next.left;
+    }
+
+return smallest.data;
+}
+
+BST.prototype.largest = function(){
+  var next = this.right;
+    while(next){
+      var largest = next;
+      next = next.right;
+    }
+
+return largest.data;
+}
+
+BST.prototype.view=function(){
+  return this;
 }
